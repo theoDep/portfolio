@@ -1,7 +1,9 @@
+import AnimatedTextBox from "@components/AnimatedTextBox";
+
 export default function Home() {
   return (
-    <div>
-      <p>Hello from Home</p>
-    </div>
+    <main className="relative mt-20">
+      <AnimatedTextBox />
+    </main>
   );
 }
