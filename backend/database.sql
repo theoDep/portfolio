@@ -35,7 +35,7 @@ INSERT INTO `project` (`id`, `title`, `description`, `image`, `link`, `repo`) VA
 ALTER TABLE `project`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `tech`
+ALTER TABLE `project`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 CREATE TABLE `project_tech` (
