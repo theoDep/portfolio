@@ -51,7 +51,7 @@ class ProjectController {
       });
   };
 
-  static add = (req, res) => {
+  static add = (req, res, next) => {
     const project = req.body;
 
     // TODO validations (length, format...)
@@ -59,7 +59,8 @@ class ProjectController {
     models.project
       .insert(project)
       .then(([result]) => {
-        res.status(201).send({ ...project, id: result.insertId });
+        req.body.id = result.insertId;
+        next();
       })
       .catch((err) => {
         console.error(err);
