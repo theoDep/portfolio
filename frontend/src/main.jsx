@@ -12,11 +12,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <Router>
-      <Navbar />
-      <ProjectContextProvider>
+    <ProjectContextProvider>
+      <Router>
+        <Navbar />
         <App />
-      </ProjectContextProvider>
-    </Router>
+      </Router>
+    </ProjectContextProvider>
   </React.StrictMode>
 );
