@@ -1,16 +1,27 @@
 const models = require("../models");
 
 class ProjectController {
-  static browse = (req, res) => {
-    models.project
-      .findAll()
-      .then(([rows]) => {
-        res.send(rows);
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
+  static browse = async (req, res) => {
+    try {
+      const [response] = await models.project.findAll();
+      const rows = [];
+      await Promise.all(
+        response.map(async (project) => {
+          const [techsObjects] = await models.project.findTechs(project.id);
+          const techsAsArray = techsObjects.reduce((acc, tech) => {
+            acc.push(tech.name);
+            return acc;
+          }, []);
+          // eslint-disable-next-line no-param-reassign
+          project.techs = techsAsArray;
+          rows.push(project);
+        })
+      );
+      await res.send(rows);
+    } catch (err) {
+      console.error(err);
+      res.sendStatus(500);
+    }
   };
 
   static read = (req, res) => {
