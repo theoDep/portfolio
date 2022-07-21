@@ -6,6 +6,7 @@ import Router from "./helpers/Router";
 import App from "./App";
 
 import "./index.css";
+import { ProjectContextProvider } from "./contexts/ProjectContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -13,7 +14,9 @@ root.render(
   <React.StrictMode>
     <Router>
       <Navbar />
-      <App />
+      <ProjectContextProvider>
+        <App />
+      </ProjectContextProvider>
     </Router>
   </React.StrictMode>
 );
