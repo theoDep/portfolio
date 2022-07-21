@@ -1,33 +1,22 @@
 import AnimatedTextBox from "@components/AnimatedTextBox";
 import ProjectBox from "@components/ProjectBox";
-import { useState } from "react";
-
-import projects from "../dummies/projects";
+import { useProjectContext } from "../contexts/ProjectContext";
+import spinner from "../assets/images/spinner.svg";
 
 export default function Home() {
-  const [showProject, setShowProject] = useState(projects[0]);
-  const previous = () => {
-    const index = projects.indexOf(showProject);
-    if (index === 0) {
-      setShowProject(projects[projects.length - 1]);
-    } else {
-      setShowProject(projects[index - 1]);
-    }
-  };
-
-  const next = () => {
-    const index = projects.indexOf(showProject);
-    if (index === projects.length - 1) {
-      setShowProject(projects[0]);
-    } else {
-      setShowProject(projects[index + 1]);
-    }
-  };
+  const { showProject, next, previous } = useProjectContext();
+  const { currentProject } = showProject;
 
   return (
     <section className="relative mt-8 lg:mt-20 lg:flex">
       <AnimatedTextBox />
-      <ProjectBox project={showProject} previous={previous} next={next} />
+      {currentProject ? (
+        <ProjectBox project={currentProject} previous={previous} next={next} />
+      ) : (
+        <div>
+          <img src={spinner} alt="loading" />
+        </div>
+      )}
     </section>
   );
 }
