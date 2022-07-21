@@ -3,7 +3,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tech` (
   `id` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL
+  `name` varchar(255) UNIQUE NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -22,11 +22,11 @@ ALTER TABLE `tech`
 
 CREATE TABLE `project` (
   `id` int(11) UNSIGNED NOT NULL,
-  `title` varchar(255) NOT NULL,
+  `title` varchar(255) UNIQUE NOT NULL,
   `description` text NULL,
   `image` varchar(255) NOT NULL,
-  `link` varchar(255) NULL,
-  `repo` varchar(255) NOT NULL
+  `link` varchar(255) UNIQUE NULL,
+  `repo` varchar(255) UNIQUE NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `project` (`id`, `title`, `description`, `image`, `link`, `repo`) VALUES
